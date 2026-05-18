@@ -96,7 +96,7 @@ options(timeout = 600)
 if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
   dir.create("data", showWarnings = FALSE)
   download.file(
-    url = "https://seq-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/Human_Colon_Cancer_P2.tar.gz",
+    url = "https://intro-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/Human_Colon_Cancer_P2.tar.gz",
     destfile = "data/Human_Colon_Cancer_P2.tar.gz",
     mode = "wb"
   )
