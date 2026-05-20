@@ -30,6 +30,7 @@ library(Voyager)
 library(ggplot2)
 library(patchwork)
 library(scuttle)
+library(sfarrow) #JUNA: needs to be installed 
 ```
 
 ## Data for the course
@@ -62,7 +63,7 @@ options(timeout = 600)
 if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
   dir.create("data", showWarnings = FALSE)
   download.file(
-    url = "https://seq-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/Human_Colon_Cancer_P2.tar.gz",
+    url = "https://intro-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/Human_Colon_Cancer_P2.tar.gz",
     destfile = "data/Human_Colon_Cancer_P2.tar.gz",
     mode = "wb"
   )
@@ -77,6 +78,8 @@ if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
   message("Data exists, please proceed to next steps!")
 }
 ```
+<!-- JUNA: I don't think we need again the code to download the data, is in exercise 1a (with correct link) -->
+
 
 We import the compact Xenium output into a `SpatialFeatureExperiment` object:
 
@@ -232,7 +235,11 @@ plotSpatialFeature(sfe, "PIGR", exprs_values = "counts")
 Choose another marker gene and visualize its spatial pattern.
 
 How does the interpretation differ from plotting a gene on Visium HD bins?
+
 :::
+<!-- JUNA: If we want them to compare to Visium HD we should not delete environment in previous exercise, or load the spe object here as part of the solution -->
+
+
 
 ::: {.callout-tip collapse="true"}
 ## Answer
@@ -261,6 +268,9 @@ sfe_sub <- sfe[, keep]
 dim(sfe)
 dim(sfe_sub)
 ```
+
+<!-- JUNA: Do we need to do that again? I would skip it, together with the following exercise and answer and move on to segmenetation instead -->
+
 
 ::: callout-important
 ## Exercise 6
