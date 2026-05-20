@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1 A: SpatialExperiment"
+title: "Exercise 1A: SpatialExperiment"
 format: html
 editor: source
 editor_options:
@@ -53,9 +53,12 @@ library(HDF5Array)
 
 ## Data for the course
 
-We will work on a **Visium HD** dataset from a human colorectal cancer study by [Oliveira _et al_](https://www.nature.com/articles/s41588-025-02193-3). The dataset contains normal adjacent tissue (NAT) and colorectal carcinoma (CRC) from 5 patients.
+We will work on a human colorectal cancer study by [Oliveira _et al_](https://www.nature.com/articles/s41588-025-02193-3). The dataset contains normal adjacent tissue (NAT) and colorectal carcinoma (CRC) from 5 patients.
 
-We will focus on a single Visium HD slide from a patient called "P2", available from the [10X website](https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc). We will focus on the "binned output" available as an output of the Space Ranger pipeline (version 3.0). The full output is very large, so for practical reasons we use a region of interest, selected to include an interesting part of the tissue, because it contains gland-like epithelial structures together with stromal or lower-density areas:
+We will focus on data from a patient called "P2", available from the [10X website](https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc). 
+For this sample, the study provides Visium HD data at 2, 8, and 16 um binned resolutions and output from cell segmentation, as well as a matching Xenium dataset. The data were generated from serial sections of the same samples, so they are spatially matched and can be used for cross-platform comparisons.
+
+In this exercise we will work with **Visium HD** data and focus on the "binned output" available as an output of the Space Ranger pipeline (version 3.0). The full output is very large, so for practical reasons we use a region of interest, selected to include an interesting part of the tissue, because it contains gland-like epithelial structures together with stromal or lower-density areas:
 
 
 ```{r day1-1a-SpatialExperiment-4}

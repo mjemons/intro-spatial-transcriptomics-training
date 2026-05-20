@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1B: SpatialFeatureExperiment"
+title: "Exercise 1B: SpatialFeatureExperiment Xenium"
 format: html
 editor: source
 editor_options:
@@ -34,13 +34,13 @@ library(sfarrow) #JUNA: needs to be installed
 library(HDF5Array)
 ```
 
-## Data for the course
+## Input data
 
-We will work on a **Xenium** dataset from a human colorectal cancer study by [Oliveira _et al_](https://www.nature.com/articles/s41588-025-02193-3). The dataset contains normal adjacent tissue (NAT) and colorectal carcinoma (CRC) from 5 patients.
+Next, will work with the **Xenium** dataset from the P2 sample (human colorectal cancer study by [Oliveira _et al_](https://www.nature.com/articles/s41588-025-02193-3)). 
 
-We will focus on a single Xenium slide from a patient called "P2", available from the [10X website](https://www.10xgenomics.com/platforms/visium/product-family/dataset-human-crc). This slide is a serial section of the sample used in `Exercise 1 A`, so the two datasets are biologically related but not the exact same physical tissue section. 
+This slide is a serial section of the sample used in `Exercise 1A`, so the two datasets are biologically related but not the exact same physical tissue section. 
 
-The full Xenium output is very large and includes cell boundaries, nucleus boundaries, transcript locations, morphology images, and expression matrices. For this exercise, for practical reasons we use a region of interest, selected to **approximately match the region of interest used in `Exercise 1 A`**, and only include some of the layers in the imported compact course folder. This makes the two exercises comparable while avoiding a full image-registration workflow during the practical. This region was chosen from the overview plot because it contains gland-like epithelial structures together with stromal or lower-density areas.
+The full Xenium output is very large and includes cell boundaries, nucleus boundaries, transcript locations, morphology images, and expression matrices. For this exercise, for practical reasons we use a region of interest, selected to **approximately match the region of interest used in `Exercise 1 A`**, and only include some of the layers in the imported compact course folder. This makes the two exercises comparable while avoiding a full image-registration workflow during the practical.
 
 
 ```{r day1-1b-SFE-2}
@@ -54,30 +54,6 @@ roi_xenium
 ```
 
 We import the Xenium output with `flip = "none"` so the exercise uses the native Xenium coordinate orientation. The same visual region may appear with negative y coordinates if the geometry has been flipped during import with morphology images. Because the compact course folder does not include morphology images, we use the positive y coordinates shown above.
-
-```{r day1-1b-SFE-3}
-options(timeout = 600)
-
-if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
-  dir.create("data", showWarnings = FALSE)
-  download.file(
-    url = "https://intro-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/Human_Colon_Cancer_P2.tar.gz",
-    destfile = "data/Human_Colon_Cancer_P2.tar.gz",
-    mode = "wb"
-  )
-
-  untar(
-    tarfile = "data/Human_Colon_Cancer_P2.tar.gz",
-    exdir = "data/"
-  )
-
-  file.remove("data/Human_Colon_Cancer_P2.tar.gz")
-} else {
-  message("Data exists, please proceed to next steps!")
-}
-```
-<!-- JUNA: I don't think we need again the code to download the data, is in exercise 1a (with correct link) -->
-
 
 We import the compact Xenium output into a `SpatialFeatureExperiment` object:
 
@@ -182,7 +158,7 @@ Inspect the available column geometries in the Xenium object. To which biologica
 ::: {.callout-tip collapse="true"}
 ## Answer
 
-The available geometries include cell centroids, cell boundaries, and nucleus boundaries. These are are commonly available for imaging-based spatial transcriptomics technologies, but the exact names depend on the reader functions and packages used to import the data.
+The available geometries include cell centroids, cell boundaries, and nucleus boundaries. These are commonly available for imaging-based spatial transcriptomics technologies, but the exact names depend on the reader functions and packages used to import the data.
 
 ```{r day1-1b-SFE-9}
 colGeometries(sfe)[["centroids"]]
@@ -268,7 +244,7 @@ plotSpatialFeature(sfe,
 dir.create("results/day1", showWarnings = FALSE, recursive = TRUE)
 
 saveHDF5SummarizedExperiment(sfe,
-  dir = "results/day1", prefix = "01.1b_sfe_", replace = TRUE,
+  dir = "results/day1", prefix = "01.1b_sfe_xenium", replace = TRUE,
   chunkdim = NULL, level = NULL, as.sparse = NA,
   verbose = NA
 )

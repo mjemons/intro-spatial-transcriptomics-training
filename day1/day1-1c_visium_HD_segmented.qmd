@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1 C: Visium HD Segmented Data"
+title: "Exercise 1C: SpatialFeatureExperiment Visium HD segmented"
 format: html
 editor: source
 editor_options:
@@ -27,23 +27,17 @@ library(sf)
 library(arrow)
 library(dplyr)
 library(tidyr)
-#library(scuttle)
-#library(SingleR)
-#library(Voyager)
 library(ggplot2)
-#library(ggspavis)
-#library(VisiumIO)
-#library(OSTA.data)
-#library(patchwork)
-#library(SpotSweeper)
-#library(DropletUtils)
 library(SpatialExperiment)
 library(SpatialFeatureExperiment)
+library(Voyager)
+library(VisiumIO)
 ```
 
-## Data for the course
+Finally, we will work with the **Visium HD segmented output**. This data corresponds to the same sample and region of interest as the binned data from `Exercise 1A`, but instead of being binned, it contains the output of cell segmentation. Since Space Ranger version 4.0, the output of cell segmentation is available as an optional output of the pipeline, and it contains the coordinates of the segmented cells and their boundaries.
 
-<!-- Adapt depending on the final data structure -->
+<!-- Download the segmented output from the 10X website if it does not exist in the `data` folder. -->
+
 
 ```{r day1-1c-visium_HD_segmented-3}
 options(timeout = 600)
@@ -67,17 +61,32 @@ if (!dir.exists("data/Visium_HD_Human_Colon_Cancer_segmented_outputs/")) {
 }
 ```
 
-We start reading the object into a `SpatialExperiment` object and then subset it to the course region, as we have done for visium HD binned data in the previous exercises.
+::: callout-important
+## Exercise 1
+Why will we use SpatialFeatureExperiment to work with the segmented data instead of SpatialExperiment as we did for the binned data in Exercise 1A
+?
+::: 
+
+::: {.callout-tip collapse="true"}
+## Answer
+Since segmeneted data contains cell boundaries, the coordinates of the segmented cells are not limited to the spot coordinates as in the binned data. Therefore, we will use `SpatialFeatureExperiment` to work with the segmented data, as it allows us to store and visualize spatial features such as cell boundaries, as we did for the Xenium data in Exercise 1B. 
+In contrast, `SpatialExperiment` is more suitable for binned data where the coordinates correspond to the spot centroids and there are no additional spatial features to store.
+::: 
+
+
+We will create the `SpatialFeatureExperiment` object in two steps.
+
+We start reading the object into a `SpatialExperiment` object and subset it to the course region, as we have done for visium HD binned data in the previous exercises.
 
 
 ```{r day1-1c-visium_HD_segmented-4}
+# Read the segmented output into a SpatialExperiment object
 spe_seg <- TENxVisiumHD(
   segmented_outputs = "data/segmented_outputs/",
   processing = "filtered",
   format = "h5",
   images = "lowres"
-) |>
-  import()
+) 
 
 rownames(spe_seg) <- uniquifyFeatureNames(
   ID = rowData(spe_seg)$ID,
@@ -88,13 +97,8 @@ spe_seg
 ```
 
 
-
-##########
-
-Once the object is loaded, define the region of interest (ROI) for the course. 
-
-
 ```{r day1-1c-visium_HD_segmented-5}
+# Subset to the region of interest
 roi_visium <- c(
   xmin = 50000,
   xmax = 58000,
@@ -108,7 +112,6 @@ spe_seg <- spe_seg[, spatialCoords(spe_seg)[, 1] >= roi_visium[["xmin"]] &
   spatialCoords(spe_seg)[, 2] >= roi_visium[["ymin"]] &
   spatialCoords(spe_seg)[, 2] <= roi_visium[["ymax"]]]
 ```
-
 
 
 Load the previous binned object for comparison:
@@ -188,12 +191,13 @@ plot(st_geometry(colGeometry(sfe_seg)), col=rep(colors(), 2), )
 <!--- JUNA: y-axis is flipped using plot() --->
 
 Save the object
-```{r day1-1c-visium_HD_segmented-9}
+```{r day1-1c-visium_HD_segmented-10}
 saveHDF5SummarizedExperiment(sfe_seg,
-  dir = "results/day1", prefix = "01.1_sfe_seg", replace = TRUE,
+  dir = "results/day1", prefix = "01.1_sfe_visium", replace = TRUE,
   chunkdim = NULL, level = NULL, as.sparse = NA,
   verbose = NA
 )
-
 ```  
 
+For the rest of the exercises, we will use the segmented object, but feel free to explore the binned object as well and compare the results.
+ 
