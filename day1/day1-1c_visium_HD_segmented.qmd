@@ -1,0 +1,203 @@
+---
+title: "Exercise 1C: SpatialFeatureExperiment Visium HD segmented"
+format: html
+editor: source
+editor_options:
+  chunk_output_type: console
+execute:
+  warning: false
+---
+
+## Learning Objectives
+
+By the end of this exercise, you will be able to:
+
+-  TO DEFINE
+<!-- Adapt depending on the final data structure -->
+
+
+## Libraries
+
+```{r day1-1c-visium_HD_segmented-1}
+#| message: false
+#| warning: false
+#| output: false
+
+library(sf)
+library(arrow)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(SpatialExperiment)
+library(SpatialFeatureExperiment)
+library(Voyager)
+library(VisiumIO)
+```
+
+Finally, we will work with the **Visium HD segmented output**. This data corresponds to the same sample and region of interest as the binned data from `Exercise 1A`, but instead of being binned, it contains the output of cell segmentation. Since Space Ranger version 4.0, the output of cell segmentation is available as an optional output of the pipeline, and it contains the coordinates of the segmented cells and their boundaries.
+
+<!-- Download the segmented output from the 10X website if it does not exist in the `data` folder. -->
+
+
+```{r day1-1c-visium_HD_segmented-3}
+options(timeout = 600)
+
+if (!dir.exists("data/Visium_HD_Human_Colon_Cancer_segmented_outputs/")) {
+  dir.create("data", showWarnings = FALSE)
+  download.file(
+    url = "https://cf.10xgenomics.com/samples/spatial-exp/4.0.1/Visium_HD_Human_Colon_Cancer/Visium_HD_Human_Colon_Cancer_segmented_outputs.tar.gz",
+    destfile = "data/Visium_HD_Human_Colon_Cancer_segmented_outputs.tar.gz",
+    mode = "wb"
+  )
+
+  untar(
+    tarfile = "data/Visium_HD_Human_Colon_Cancer_segmented_outputs.tar.gz",
+    exdir = "data/"
+  )
+
+  file.remove("data/Visium_HD_Human_Colon_Cancer_segmented_outputs.tar.gz")
+} else {
+  message("Data exists, please proceed to next steps!")
+}
+```
+
+::: callout-important
+## Exercise 1
+Why will we use SpatialFeatureExperiment to work with the segmented data instead of SpatialExperiment as we did for the binned data in Exercise 1A
+?
+::: 
+
+::: {.callout-tip collapse="true"}
+## Answer
+Since segmeneted data contains cell boundaries, the coordinates of the segmented cells are not limited to the spot coordinates as in the binned data. Therefore, we will use `SpatialFeatureExperiment` to work with the segmented data, as it allows us to store and visualize spatial features such as cell boundaries, as we did for the Xenium data in Exercise 1B. 
+In contrast, `SpatialExperiment` is more suitable for binned data where the coordinates correspond to the spot centroids and there are no additional spatial features to store.
+::: 
+
+
+We will create the `SpatialFeatureExperiment` object in two steps.
+
+We start reading the object into a `SpatialExperiment` object and subset it to the course region, as we have done for visium HD binned data in the previous exercises.
+
+
+```{r day1-1c-visium_HD_segmented-4}
+# Read the segmented output into a SpatialExperiment object
+spe_seg <- TENxVisiumHD(
+  segmented_outputs = "data/segmented_outputs/",
+  processing = "filtered",
+  format = "h5",
+  images = "lowres"
+) 
+
+rownames(spe_seg) <- uniquifyFeatureNames(
+  ID = rowData(spe_seg)$ID,
+  names = rowData(spe_seg)$Symbol
+)
+
+spe_seg
+```
+
+
+```{r day1-1c-visium_HD_segmented-5}
+# Subset to the region of interest
+roi_visium <- c(
+  xmin = 50000,
+  xmax = 58000,
+  ymin = 14500,
+  ymax = 22000
+)
+roi_visium
+
+spe_seg <- spe_seg[, spatialCoords(spe_seg)[, 1] >= roi_visium[["xmin"]] &
+  spatialCoords(spe_seg)[, 1] <= roi_visium[["xmax"]] &
+  spatialCoords(spe_seg)[, 2] >= roi_visium[["ymin"]] &
+  spatialCoords(spe_seg)[, 2] <= roi_visium[["ymax"]]]
+```
+
+
+Load the previous binned object for comparison:
+
+```{r day1-1c-visium_HD_segmented-6}
+spe <- loadHDF5SummarizedExperiment(dir="results/day1/", prefix="01.1_spe")
+```
+
+::: callout-important
+## Exercise 1
+
+- 1. Compare the number of features and spots in the segmented and binned objects. What do you observe?
+- 2. Compare the colData of the two objects. What are the differences in the metadata columns? What do they represent?
+- 3. Do you observe any other differences in the content of the objects? For example, in the rowData or the spatial coordinates?
+
+:::
+
+<!-- Adapt the questions depending on the final order of exercises, add answers -->
+
+```{r day1-1c-visium_HD_segmented-7}
+spe_seg
+plotVisium(spe, zoom=T)
+plotVisium(spe_seg, zoom=T)
+
+plotVisium(spe,
+  annotate = "PIGR",
+  assay = "counts",
+  zoom = TRUE,
+  point_size = 1,
+  point_shape = 22)
+
+plotVisium(spe_seg,
+  annotate = "PIGR",
+  assay = "counts",
+  zoom = TRUE,
+  point_size = 1,
+  point_shape = 22)
+
+
+```
+
+Using visium HD segmented data allows us to have a more detailed view of the tissue, as we are not limited to the coordinates of the spots. The x and y coordinates of the `SpatialExperiment` object will correspond to the centroid of the segmented cells, but we can also have access to the full segmentation of the cells.
+
+Information about the cell segmentation is stored in the `metadata` of the `SpatialExperiment` object, and it contains the coordinates of the boundaries of each segmented cell. In order to visualize the segmentation, we creare a `SpatialFeatureExperiment` object, which allows us to store and visualize spatial features such as the cell segmentation boundaries (see `colGeometries` function in the `SpatialFeatureExperiment` package).
+
+<!-- Adapt depending on the final order of exercises -->
+
+```{r day1-1c-visium_HD_segmented-8}
+sfe_seg <- toSpatialFeatureExperiment(spe_seg)
+colGeometries(sfe_seg)
+
+# Convert numeric cell_id (e.g. 3) -> "cellid_000000003-1"
+cell_id_to_colname <- function(x) {
+  paste0("cellid_", sprintf("%09d", as.integer(x)), "-1")
+}
+cell_id_char <- cell_id_to_colname(metadata(spe_seg)$cellseg$cell_id)
+
+# add cell segmentation boundaries
+seg <- metadata(spe_seg)$cellseg
+rownames(seg) <- cell_id_char
+
+i <- colnames(spe_seg)
+j <- match(i, rownames(seg))
+seg <- seg[j, ]
+all(colnames(sfe_seg) == rownames(seg))
+colGeometries(sfe_seg) <- list(cellseg=seg)
+colGeometries(sfe_seg)
+```
+
+We can visualise such geometries using 
+```{r day1-1c-visium_HD_segmented-9}
+
+plot(st_geometry(colGeometry(sfe_seg)), col=rep(colors(), 2), )
+
+```  
+
+<!--- JUNA: y-axis is flipped using plot() --->
+
+Save the object
+```{r day1-1c-visium_HD_segmented-10}
+saveHDF5SummarizedExperiment(sfe_seg,
+  dir = "results/day1", prefix = "01.1_sfe_visium", replace = TRUE,
+  chunkdim = NULL, level = NULL, as.sparse = NA,
+  verbose = NA
+)
+```  
+
+For the rest of the exercises, we will use the segmented object, but feel free to explore the binned object as well and compare the results.
+ 
