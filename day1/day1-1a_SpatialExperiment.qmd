@@ -55,7 +55,8 @@ library(HDF5Array)
 
 We will work on a **Visium HD** dataset from a human colorectal cancer study by [Oliveira _et al_](https://www.nature.com/articles/s41588-025-02193-3). The dataset contains normal adjacent tissue (NAT) and colorectal carcinoma (CRC) from 5 patients.
 
-We will focus on a Visium HD slide from one patient (called "P2CRC"), available from the [10X website](https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc). We will focus on the "binned output" available as an output of the Space Ranger pipeline (version 3.0). The full output is very large, so for practical reasons we use a region of interest, selected to include an interesting part of the tissue.:
+We will focus on a single Visium HD slide from a patient called "P2", available from the [10X website](https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc). We will focus on the "binned output" available as an output of the Space Ranger pipeline (version 3.0). The full output is very large, so for practical reasons we use a region of interest, selected to include an interesting part of the tissue, because it contains gland-like epithelial structures together with stromal or lower-density areas:
+
 
 ```{r day1-1a-SpatialExperiment-4}
 roi_visium <- c(
@@ -105,7 +106,6 @@ if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
 ```
 
 We will import the 16 um binned Visium HD output into a `SpatialExperiment` object and then subset it to the course region. The coordinates are in the native Visium HD image coordinate system returned by `spatialCoords()`.
-
 
 ```{r day1-1a-SpatialExperiment-6}
 spe <- TENxVisiumHD(
@@ -210,7 +210,7 @@ rowData(spe) |> head()
 nrow(spe)
 ```
 
-The assay stores the count matrix:
+The assay stores the UMI counts matrix:
 
 ```{r day1-1a-SpatialExperiment-10}
 assay(spe)
@@ -246,7 +246,7 @@ imgRaster(spe) |> plot()
 
 ## Visualizing the tissue region
 
-To get a visual overview, we use `ggspavis::plotVisium`. First we plot the tissue image without bins:
+To get a visual overview, we use `plotVisium()` function from the `ggspavis` package. First we plot the tissue image without bins:
 
 ```{r day1-1a-SpatialExperiment-15}
 plotVisium(spe, spots = FALSE)
@@ -270,7 +270,7 @@ Why do we see only a specific region of the slide?
 The full Visium HD output is much larger than needed for this introductory exercise. At the start of this exercise, we subsetted the object to one representative tissue region so that it remains fast to plot and process. This same region is also used as the anchor for selecting a comparable Xenium region in `Exercise 1 B`.
 :::
 
-It is possible to colour bins according to a gene or a column in `colData`, for example `PIGR`:
+It is possible to colour bins according to a gene or a column in `colData`, for example `PIGR`. We renamed the rows to gene symbols after import, which is why we can refer to this marker as `"PIGR"` rather than by its Ensembl ID. At this stage we plot the number of UMIs since log-normalized counts will be introduced later in the course.
 
 ```{r day1-1a-SpatialExperiment-17}
 #| warning: false
@@ -339,7 +339,7 @@ We save the filtered `SpatialExperiment` object for the next steps. Remember tha
 ```{r day1-1a-SpatialExperiment-21}
 dir.create("results/day1", showWarnings = FALSE, recursive = TRUE)
 saveHDF5SummarizedExperiment(spe,
-  dir = "results/day1", prefix = "01.1_spe", replace = TRUE,
+  dir = "results/day1", prefix = "01.1_spe_", replace = TRUE,
   chunkdim = NULL, level = NULL, as.sparse = NA,
   verbose = NA
 )

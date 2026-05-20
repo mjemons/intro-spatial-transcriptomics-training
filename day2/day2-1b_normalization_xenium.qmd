@@ -36,6 +36,8 @@ library(scuttle)
 library(scater)
 library(Voyager)
 library(patchwork)
+library(HDF5Array)
+
 ```
 
 ## Load the Xenium object
