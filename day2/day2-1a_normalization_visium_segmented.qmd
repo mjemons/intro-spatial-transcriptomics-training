@@ -42,7 +42,7 @@ library(ggspavis)
 We start with the filtered Visium HD object saved at the end of Exercise 2.
 
 ```{r}
-sfe <- loadHDF5SummarizedExperiment(dir = "results/day1", prefix = "01.2_sfe")
+sfe <- loadHDF5SummarizedExperiment(dir = "results/day1", prefix = "01.2_sfe_")
 sfe
 ```
 
@@ -160,7 +160,7 @@ dir.create("results/day2", showWarnings = FALSE, recursive = TRUE)
 saveHDF5SummarizedExperiment(
   sfe,
   dir = "results/day2",
-  prefix = "02.1_sfe",
+  prefix = "02.1_sfe_",
   replace = TRUE,
   chunkdim = NULL,
   level = NULL,

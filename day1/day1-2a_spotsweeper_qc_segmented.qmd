@@ -51,7 +51,7 @@ We will start by loading our `SpatialExperiment` object, which was saved in the 
 
 ```{r}
 # Load the SpatialExperiment object
-sfe <- loadHDF5SummarizedExperiment(dir="results/day1/", prefix="01.1_sfe_seg")
+sfe <- loadHDF5SummarizedExperiment(dir="results/day1/", prefix="01.1_sfe_seg_")
 
 # Identify mitochondrial genes (genes with symbol starting with "MT-")
 is.mito <- rownames(sfe)[grepl("^MT-", rownames(sfe))]
@@ -404,7 +404,7 @@ What is the size of the dataset after filtering?
 
 Save the filtered `SpatialExperiment` object for the next steps:
 ```{r}
-saveHDF5SummarizedExperiment(sfe, dir="results/day1", prefix="01.2_sfe", replace=TRUE,
+saveHDF5SummarizedExperiment(sfe, dir="results/day1", prefix="01.2_sfe_", replace=TRUE,
                                 chunkdim=NULL, level=NULL, as.sparse=NA,
                                 verbose=NA)
 ```

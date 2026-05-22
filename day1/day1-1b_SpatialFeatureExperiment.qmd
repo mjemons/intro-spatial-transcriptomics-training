@@ -108,6 +108,10 @@ rowData(sfe) |> head()
 spatialCoords(sfe) |> head()
 ```
 
+![Overview of the `SpatialFeatureExperiment` class structure](../assets/images/sfe.png)
+
+*Note*: The practical `Exercise 1C` uses the segmented output of the Visium HD dataset used in `Exercise 1A`, which will also be stored into a `SpatialFeatureExperiment` object.
+
 ::: callout-important
 ## Exercise 2
 
