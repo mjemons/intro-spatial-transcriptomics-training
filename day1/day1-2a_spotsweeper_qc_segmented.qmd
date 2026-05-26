@@ -51,7 +51,7 @@ We will start by loading our `SpatialExperiment` object, which was saved in the 
 
 ```{r}
 # Load the SpatialExperiment object
-sfe <- loadHDF5SummarizedExperiment(dir="results/day1/", prefix="01.1_sfe_seg_")
+sfe <- loadHDF5SummarizedExperiment(dir="results/day1/", prefix="01.1_sfe_visium_")
 
 # Identify mitochondrial genes (genes with symbol starting with "MT-")
 is.mito <- rownames(sfe)[grepl("^MT-", rownames(sfe))]

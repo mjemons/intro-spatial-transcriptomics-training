@@ -33,7 +33,9 @@ library(SpatialExperiment)
 library(SpatialFeatureExperiment)
 library(Voyager)
 library(VisiumIO)
-
+library(scuttle)
+library(HDF5Array)
+library(ggspavis)
 ```
 
 Finally, we will work with the **Visium HD segmented output**. This data corresponds to the same sample and region of interest as the binned data from `Exercise 1A`, but instead of being binned, it contains the output of cell segmentation. Since Space Ranger version 4.0, the output of cell segmentation is available as an optional output of the pipeline, and it contains the coordinates of the segmented cells and their boundaries.
@@ -93,6 +95,14 @@ rownames(spe_seg) <- uniquifyFeatureNames(
   ID = rowData(spe_seg)$ID,
   names = rowData(spe_seg)$Symbol
 )
+
+# Convert numeric cell_id (e.g. 3) -> "cellid_000000003-1"
+cell_id_to_colname <- function(x) {
+    paste0("cellid_", sprintf("%09d", as.integer(x)), "-1")
+}
+cell_id_char <- cell_id_to_colname(metadata(spe_seg)$cellseg$cell_id)
+
+metadata(spe_seg)$cellseg$rownames <- cell_id_char
 
 spe_seg
 ```
@@ -166,16 +176,16 @@ In order to manipulate the segmentation in an easier way, we create a `SpatialFe
 sfe_seg <- toSpatialFeatureExperiment(spe_seg)
 colGeometries(sfe_seg)
 
-## Extract cell segmentation boundaries from the metadata
 seg <- metadata(spe_seg)$cellseg
-rownames(seg) <- metadata(spe_seg)$cellseg$cell_id
 
-## Sort the segmentation similar to the order of cells in the SpatialFeatureExperiment object
-i <- match(colnames(spe_seg), rownames(seg))
-seg <- seg[i, ]
+cropped_seg <- seg[seg$rownames %in% base::colnames(spe_seg), ]
+
+base::rownames(cropped_seg) <- base::colnames(spe_seg)
+
+stopifnot(base::rownames(cropped_seg) == cropped_seg$rownames)
 
 ## Add the geometry to the object
-colGeometries(sfe_seg)[["cellSeg"]] <- seg
+colGeometries(sfe_seg)[["cellseg"]] <- cropped_seg
 colGeometries(sfe_seg)
 ```
 
@@ -186,13 +196,13 @@ plot(st_geometry(colGeometries(sfe_seg)[["centroids"]]),
      col=rep(colors(), 2), 
      pch=16)
 
-plot(st_geometry(colGeometries(sfe_seg)[["cellSeg"]]), 
+plot(st_geometry(colGeometries(sfe_seg)[["cellseg"]]), 
      col=rep(colors(), 2), 
      lty=0)
 
 ## Plot the expression of PIGR on each segmented cell
 plotSpatialFeature(sfe_seg, 
-                   colGeometryName="cellSeg", 
+                   colGeometryName="cellseg", 
                    features="PIGR", 
                    exprs_values = "counts") 
 ```  
