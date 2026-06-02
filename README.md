@@ -15,6 +15,7 @@ Any contribution to this course material is highly appreciated :+1:. Please have
 - Geert van Geest [ORCiD](https://orcid.org/0000-0002-1561-078X)
 - Julien Roux [ORCiD](https://orcid.org/0000-0002-4192-5099)
 - Martin Emons [ORCiD](https://orcid.org/0009-0000-5219-5311)
+- Samuel Gunz [ORCiD](https://orcid.org/0000-0002-8909-0932)
 - Peiying Cai [ORCiD](https://orcid.org/0009-0001-9229-2244)
 - Ivan Berest [ORCiD](https://orcid.org/0000-0001-7607-9163)
 - Mark Robinson [ORCiD](https://orcid.org/0000-0002-3048-5518)
