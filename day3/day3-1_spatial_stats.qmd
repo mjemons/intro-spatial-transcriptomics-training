@@ -77,7 +77,11 @@ In what follows, we will perform three types of analyses on different _spatial s
 
 ## Cell type-free analysis
 
-Lattice-based analysis is focused on comparing a numerical value across the lattice of measurements. Such a lattice is constructed by defining the neighbourhood of each cell. First, we will define a neighbourhood on which we want to compute spatial statistics metrics. We will use a $k = 5$ nearest neighbourhood of each cell using the function `findSpatialNeighbors`. 
+Lattice-based analysis is focused on comparing a numerical value across the lattice of measurements. Such a lattice is constructed by defining the neighbourhood of each cell. First, we will define a neighbourhood on which we want to compute spatial statistics metrics. 
+
+In binned 10x Visium, it is very natural to consider the direct neighbours of the bins in the Visium lattice, for example with the function `Voyager::findVisiumGraph()`. 
+
+Here we create a knn graph with the function `SpatialFeatureExperiment::findSpatialNeighbors()`, considering the $k = 5$ nearest neighbourhood of each cell. 
 
 ```{r day3-1-spatial-stats-4}
 #| fig-width: 7
@@ -95,6 +99,12 @@ plotColGraph(sfe,
   colGraphName = "knn5"
 ) + theme_void()
 ```
+
+We notice two things:
+
+- The $y$-coordinate is flipped compared to the image. This is due to the way that Visium data is acquired. The Visium slide is placed on top of the tissue but the H&E image is acquired from below the tissue.
+
+- The irregular lattice is clearly visible.
 
 ### Global indicators of spatial association
 
@@ -129,7 +139,7 @@ gene.var <- modelGeneVariances(logcounts(sfe),
                                num.threads = 1)
 # chooseHighlyVariableGenes() expects the residual variance statistics
 hvg.index <- chooseHighlyVariableGenes(gene.var$statistics$residuals, 
-                                      top = 100)
+                                       top = 100)
 
 #add the hvgs to the `sfe` - adapted from https://github.com/libscran/scrapper/blob/master/R/se_chooseRnaHvgs.R
 is.hvg <- logical(nrow(gene.var$statistics))
@@ -170,7 +180,7 @@ Therefore, we will investigate _local_ indicators of spatial association [@ansel
 In the case of Moran's $I$, we will now not calculate one measure for the entire field-of-view but rather one metric per location/spot $i$: $I_i$.
 
 ::: callout-important
-## Exercise
+### Exercise
 
 - Calculate local Moran's $I$ for the top three global Moran's $I$ genes from above using the function `Voyager::runUnivariate()`
 
@@ -275,7 +285,7 @@ plotLocalResult(
 
 ## Cell type-based analysis
 
-In the cell-based analysis chapter, we will compare the distribution of categorical cell types in space using point pattern analysis. Let us first plot the cell types in space
+In the cell type-based analysis chapter, we will compare the distribution of categorical cell types in space using point pattern analysis. Let us first plot the cell types in space
 
 ```{r day3-1-spatial-stats-15}
 #| fig-width: 10
@@ -398,7 +408,7 @@ Do you think this is a good reconstruction / segmentation?
 ### Answer
 Overall the segmentation seems to have worked fine. However, we note a few things:
 1. There is one very small regions with a few Tumor cells present.
-2. There might be some under-segmentation, i.e., there are some Myeloid and Endothelial cells included in the Tumor regions. As they are part of the Tumor micro-environment we could also include them in our segmentation / defintion of tumor regions.
+2. There might be some under-segmentation, i.e., there are some Myeloid and Endothelial cells included in the Tumor regions. As they are part of the Tumor micro-environment we could also include them in our segmentation / definition of tumor regions.
 In general, the *correct* segmentation depends heavily on the research question. Using `sosta` we have a data driven way of segmentation that is not influenced by subjective annotation bias.
 :::
 
@@ -455,7 +465,7 @@ What do you notice?
 As expected, almost all of the tumor cells have negative distances (within the tumor structures). There are some Myeloid, Endothelial and T cells within the tumor regions and in the near vicinity. This hints at the composition of the tumor microenvironment. As outlined above, the values depend on the exact segmentation and definition of the tumor region.
 :::
 
-### Cell type proportions
+### Cell-type proportions
 
 Next, we look at the absolute and relative cell type proportions in each tumor region.
 
@@ -496,7 +506,7 @@ Parts of the multi-cellular section were adapted from the following [vignette](h
 ## Additional Material
 
 ::: {.callout-note collapse="true"}
-# Additional Material: Multi-sample analysis
+# Multi-sample analysis
 
 This chapter so far showed how to perform lattice-data analysis for one sample. Lattice data analysis is not yet very common in multi-sample analyses.  One option is to compute a measure of global spatial association giving one numerical value per field-of-view. First, we will load 4 slides from the dataset (2 healthy slides and 2 cancerous slides). 
 
@@ -539,7 +549,7 @@ sfeMult
 ```
 
 ::: callout-important
-## Question
+### Question
 
 - Given you have now a `SpatialFeatureExperiment` object with four samples, how would you compare a global indicator of spatial association across conditions, possibly with multiple samples? As an example, calculate global univariate Moran's $I$ for the gene "PIGR".
 
@@ -548,7 +558,7 @@ sfeMult
 :::
 
 ::: {.callout-tip collapse="true"}
-## Answer
+### Answer
 
 First, we need to calculate univariate Moran's $I$ for all samples
 
@@ -613,7 +623,7 @@ qqline(resid(mdl))
 :::
 
 ::: {.callout-note collapse="true"}
-# Additional Material: Gene expression within structures
+# Gene expression within structures
 
 Now we will subset to only the tumor regions.
 
