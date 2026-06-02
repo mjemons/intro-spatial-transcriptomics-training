@@ -54,9 +54,8 @@ library(scales)
 library(patchwork)
 library(dplyr)
 library(BiocNeighbors)
-
+library(arrow)
 library(alabaster.sfe)
-
 ```
 
 ```{r setup, include=FALSE}
@@ -183,7 +182,7 @@ plotSpatialFeature(sfe, "subsets_any_neg_sum", colGeometryName = "cellSeg",
 ::: callout-important
 ### Exercise 1
 
-Chnage this cutoff to a more stringent one. What do you conclude about the quality of this sample?
+Change this cutoff to a more stringent one. What do you conclude about the quality of this sample?
 
 :::
 
@@ -206,14 +205,21 @@ We can also go below the cell level and look at where the negative transcripts p
 ```{r day1-2b-img-qc-13}
 #| fig-width: 8
 #| fig-height: 6
-tx <- read_parquet("data/Human_Colon_Cancer_P2/xenium/outs/transcripts.parquet")
-tx |> 
-  filter(feature_name %in% rownames(sfe)[is_any_neg]) |> 
-  ggplot(aes(x_location, -y_location)) +
+
+neg_features <- as.character(rownames(sfe)[is_any_neg])
+
+tx <- arrow::read_parquet(
+  "data/Human_Colon_Cancer_P2/xenium/outs/transcripts.parquet",
+  col_select = c("feature_name", "x_location", "y_location")
+)
+
+tx_neg <- tx[tx$feature_name %in% neg_features, ]
+
+# plot only cached small object
+ggplot(tx_neg, aes(x_location, -y_location)) +
   geom_bin2d(binwidth = 30) +
   scale_fill_distiller(palette = "Blues", direction = 1) +
   labs(x = NULL, y = NULL)
-
 ```
 
 The negative-control signal is low across the entire tissue (most bins are pale, in the single digits), and cleanly outlines the tissue footprint, with the off-tissue area essentially empty.
@@ -398,6 +404,7 @@ plotSpatialFeature(sfe, "has_nuclei", colGeometryName = "cellSeg",
     geom_sf(data = SpatialFeatureExperiment::centroids(sfe)[!sfe$has_nuclei,], 
             color = "orange", size = 0.3)
 ```
+
 ```{r day1-2b-img-qc-27}
 roi_zoomed <- c(
   xmin = 3700, 

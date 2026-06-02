@@ -350,7 +350,7 @@ plotSpatialFeature(sfe_seg,
                    features="PIGR", 
                    exprs_values = "counts") 
 ```  
-:::
+
 
 ::: callout-important
 ## BONUS: Exercise 3

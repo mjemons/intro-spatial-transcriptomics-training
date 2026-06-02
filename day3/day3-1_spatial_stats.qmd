@@ -2,7 +2,7 @@
 title: "Exercise 8"
 editor: source
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 bibliography: ../references.bib
 format:
   html:
@@ -506,7 +506,7 @@ Parts of the multi-cellular section were adapted from the following [vignette](h
 This chapter so far showed how to perform lattice-data analysis for one sample. Lattice data analysis is not yet very common in multi-sample analyses.  One option is to compute a measure of global spatial association giving one numerical value per field-of-view. First, we will load 4 slides from the dataset (2 healthy slides and 2 cancerous slides). 
 
 ```{r day3-1-spatial-stats-27}
-sfeMult <- readObject("results/day3/03.1_sfeMultNorm")
+sfeMult <- readObject("data/day3/03.1_sfeMultNorm")
 ```
 
 The loaded data is already preprocessed. The chunk below shows how this was done, you don't have to rerun it.
