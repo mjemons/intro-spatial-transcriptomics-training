@@ -30,7 +30,7 @@ By the end of this exercise, you will be able to:
   - Interpret the DSP patterns 
 
 # Libraries
-```{r}
+```{r day3-3-differential-spatial-pattern-1}
 #| message: false
 #| warning: false
 #| output: false
@@ -47,7 +47,7 @@ library(DESpace)
 
 We will work with the same VisiumHD dataset from the human colon cancer study [recently published](https://www.nature.com/articles/s41588-025-02193-3). Here we use a subsetted dataset containing 4 slides from three patients (P1CRC, P5CRC, P3NAT, and P5NAT), representing either colorectal carcinoma (CRC) or normal adjacent tissues (NAT), all with pre-computed clusters.
 
-```{r}
+```{r day3-3-differential-spatial-pattern-2}
 spe <- loadHDF5SummarizedExperiment(dir="data/Human_Colon_Cancer_P1/", prefix="02.3_spe_tmp_")
 
 # Remove mitochondrial genes
@@ -86,14 +86,14 @@ spe
   - `condition`: CRC vs. Normal tissue 
   - `cluster`: spatial domain labels
 
-```{r}
+```{r day3-3-differential-spatial-pattern-3}
 head(colData(spe), 3)
 table(spe$condition)
 ```
 
 Visualize clusters for each sample.
 
-```{r}
+```{r day3-3-differential-spatial-pattern-4}
 #| fig-width: 4
 #| fig-height: 4
 
@@ -121,7 +121,7 @@ To answer the question: does the expression of a gene change between conditions,
 
 > Take few minutes to run. While it is running, take a look at the [package vignette](https://peicai.github.io/DESpace/articles/DSP.html).
 
-```{r}
+```{r day3-3-differential-spatial-pattern-5}
 res_edgeR <- dsp_test(spe,
                       cluster_col = "cluster",
                       sample_col = "sample_id",
@@ -143,7 +143,7 @@ Check out the results:
 ::: {.callout-tip collapse="true"}
 ## Answer
 
-```{r}
+```{r day3-3-differential-spatial-pattern-6}
 # Extract gene-level results
 dsp_global <- res_edgeR$gene_results
 head(dsp_global, 3)
@@ -156,7 +156,7 @@ gs <- rownames(dsp_global)[seq_len(3)]
 gs
 ```
 
-```{r}
+```{r day3-3-differential-spatial-pattern-7}
 #| fig-width: 9
 #| fig-height: 9
 
@@ -202,7 +202,7 @@ The global test tells us which genes show different spatial patterns globally, b
 
 To identify the key spatial domain where expression changes across conditions, we use `DESpace::individual_dsp()`, which performs domain-specific DSP tests.
 
-```{r}
+```{r day3-3-differential-spatial-pattern-8}
 # Focus on one cluster to decrease runtime in this exercise
 spe$c8 <- factor(ifelse(spe$cluster == "8", 1, 0))
 dsp_clu <- individual_dsp(spe,
@@ -223,7 +223,7 @@ dsp_clu <- individual_dsp(spe,
 ::: {.callout-tip collapse="true"}
 ## Answer
 
-```{r}
+```{r day3-3-differential-spatial-pattern-9}
 # Select cluster id (because after binarization cluster 8 = "1")
 id_clu <- "1"
 
@@ -237,7 +237,7 @@ head(dsp_clu[[id_clu]], 5)
 (gs <- rownames(dsp_clu[[id_clu]])[4])
 ```
 
-```{r}
+```{r day3-3-differential-spatial-pattern-10}
 #| fig-width: 8
 #| fig-height: 6
 
@@ -282,7 +282,7 @@ Try running the individual domain test using the default setting `test = "QLF`. 
 :::
 
 Clear your environment:
-```{r}
+```{r day3-3-differential-spatial-pattern-11}
 #| eval: false
 rm(list = ls())
 gc()
