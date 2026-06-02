@@ -1,5 +1,5 @@
 ---
-title: "Exercise 9"
+title: "Exercise 9: Differential Analysis"
 format: html
 editor: source
 editor_options: 

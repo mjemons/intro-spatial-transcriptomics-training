@@ -1,5 +1,5 @@
 ---
-title: "Exercise 5"
+title: "Exercise 5: Feature Selection and Dimensionality Reduction"
 format: html
 editor: source
 editor_options: 
