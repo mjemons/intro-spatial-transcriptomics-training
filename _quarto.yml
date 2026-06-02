@@ -31,7 +31,7 @@ website:
           - href: "day1/day1-2b_img_qc.qmd"
       - text: "day 2"
         menu:
-          - href: "day2/day2-1a_normalization_visium.qmd"
+          - href: "day2/day2-1a_normalization_visium_segmented.qmd"
           - href: "day2/day2-1b_normalization_xenium.qmd"
           - href: "day2/day2-2_feature_dimred.qmd"
           - href: "day2/day2-3_clustering_find_markers.qmd"
