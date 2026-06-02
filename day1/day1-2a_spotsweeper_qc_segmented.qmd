@@ -143,7 +143,7 @@ And further check how many cells would be removed with the given thresholds:
 # Flag cells based on fixed thresholds
 sfe$qc_lib_size <- sfe$sum < 300
 sfe$qc_detected <- sfe$detected < 200
-sfe$qc_mito_prop <- sfe$subsets_Mito_percent > 0.1
+sfe$qc_mito_prop <- sfe$subsets_Mito_percent > 10
 
 # Tabulate number of cells flagged by each
 qc <- grep("^qc", names(colData(sfe)))
