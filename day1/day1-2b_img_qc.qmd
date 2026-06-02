@@ -8,6 +8,9 @@ execute:
   warning: false
 ---
 
+```{r day3-1-spatial-stats-2}
+knitr::opts_chunk$set(cache.lazy = FALSE)
+```
 
 ## QC imaging ST data
 
@@ -209,8 +212,7 @@ We can also go below the cell level and look at where the negative transcripts p
 neg_features <- as.character(rownames(sfe)[is_any_neg])
 
 tx <- arrow::read_parquet(
-  "data/Human_Colon_Cancer_P2/xenium/outs/transcripts.parquet",
-  col_select = c("feature_name", "x_location", "y_location")
+  "data/Human_Colon_Cancer_P2/xenium/outs/transcripts.parquet"
 )
 
 tx_neg <- tx[tx$feature_name %in% neg_features, ]

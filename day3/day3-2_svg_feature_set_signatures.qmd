@@ -24,7 +24,7 @@ By the end of this exercise, you will be able to:
 #| message: false
 #| warning: false
 #| output: false
-library(HDF5Array) 
+library(HDF5Array)
 library(SpatialExperiment)
 library(scran) # HVG selection
 
@@ -46,7 +46,7 @@ library(pheatmap)
 We begin by loading the `SpatialExperiment` object prepared in the previous exercise containing clustering results.
 
 ```{r day2-2-svg-feature-set-signatures-2}
-spe <- loadHDF5SummarizedExperiment(dir="results/day2", prefix="01.4_spe_")
+spe <- loadHDF5SummarizedExperiment(dir="results/day2", prefix="02.3_spe_")
 ```
 
 ## Spatially variable genes (SVGs)
