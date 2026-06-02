@@ -13,7 +13,9 @@ execute:
 
 In this second exercise, we will focus on the critical step of quality control (QC) for sequencing-based spatial transcriptomics data. We will focus on the segmented Visium HD dataset used in `Exercise 1C`, so each observation is an individual cell with the selected region of interest. QC helps flag low-quality cells or technical artifacts before downstream analysis.
 
-*NOTE:* A similar QC can be done per bin or aggregated bin if a binned analysis of Visium HD is performed.
+::: callout-note
+A similar QC can be done per bin or aggregated bin if a binned analysis of Visium HD is performed.
+:::
 
 ## Learning objectives
 
@@ -71,7 +73,9 @@ Need a solution or don't delete previous object
 
 Now, we will calculate per-cell QC metrics using the `scuttle` package. The function `addPerCellQCMetrics` adds QC metrics, including mitochondrial gene percentage, to the `colData` of the `SpatialFeatureExperiment` object. 
 
-*NOTE*: This function will soon be deprecated and replaced by a faster function in the `scrapper` package (function `quickRnaQc.se()`).
+::: callout-note
+This function will soon be deprecated and replaced by a faster function in the `scrapper` package (function `quickRnaQc.se()`).
+:::
 
 Run the following code to compute these metrics:
 

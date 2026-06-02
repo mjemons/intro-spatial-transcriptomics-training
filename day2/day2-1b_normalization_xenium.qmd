@@ -57,7 +57,9 @@ The Xenium object starts with raw counts. Some segmented cells may have zero cou
 
 We use the `scuttle::logNormCounts()` function to compute size factors and add a `logcounts` assay.
 
-*NOTE:* This function will deprecate soon and replaced by the faster `scrapper::normalizeRnaCounts.se()` function.
+::: callout-note
+This function will deprecate soon and replaced by the faster `scrapper::normalizeRnaCounts.se()` function.
+:::
 
 ```{r day2-1b-normalization-xenium-3}
 assayNames(sfe)

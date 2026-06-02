@@ -53,7 +53,9 @@ sfe
 
 The object contains raw counts. We use the `scuttle::logNormCounts()` function to compute size factors and add a `logcounts` assay.
 
-*NOTE:* This function will deprecate soon and replaced by the faster `scrapper::normalizeRnaCounts.se()` function.
+::: callout-note
+This function will deprecate soon and replaced by the faster `scrapper::normalizeRnaCounts.se()` function.
+:::
 
 ```{r day2-1a-normalization-visium-segmented-3}
 assayNames(sfe)
@@ -76,8 +78,9 @@ summary(sizeFactors(sfe))
 
 The `logcounts` assay contains log-normalized expression values. The size factors adjust for differences in total count depth between cells.
 
-*NOTE*: Other more advanced normalization methods exist for scRNA-seq data, which aim at adjusting for compositional biases across cells, for example `scuttle::computePooledFactors()`, or at stabilizing the variance of such low-counts data, for example `Seurat:SCTranform()`
-
+::: callout-note
+Other more advanced normalization methods exist for scRNA-seq data, which aim at adjusting for compositional biases across cells, for example `scuttle::computePooledFactors()`, or at stabilizing the variance of such low-counts data, for example `Seurat:SCTranform()`
+:::
 :::
 
 We can inspect whether size factors have a spatial pattern. 

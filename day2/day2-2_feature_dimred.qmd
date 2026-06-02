@@ -55,7 +55,9 @@ sfe <- readObject("results/day2/02.1_sfe/")
 sfe
 ```
 
-*NOTE*: Feel free to use the normalized Xenium dataset, and compare your results to the others.
+::: callout-note
+Feel free to use the normalized Xenium dataset, and compare your results to the others.
+:::
 
 ## Feature Selection
 
@@ -65,7 +67,9 @@ Similar to scRNA-seq analysis, feature selection is a crucial step to focus on g
 
 In order to identify HVGs, we will first model the gene variance using a Poisson-noise model with `scran::modelGeneVarByPoisson()`
 
-*NOTE*: this function will soon be deprecated in favor of the faster `scrapper::chooseRnaHvgs.se()`
+::: callout-note
+this function will soon be deprecated in favor of the faster `scrapper::chooseRnaHvgs.se()`
+:::
 
 ```{r day2-2-feature-dimred-3}
 # Model gene variance to identify highly variable genes.
@@ -141,7 +145,9 @@ How would you define the spatial expression patterns of these genes in compariso
 
 `nnSVG` detects SVGs by modeling spatial gene expression using Gaussian processes, capturing smooth gradients or spatial trends. 
 
-*NOTE*: `nnSVG` is quite slow to run, so we will launch it only on the top HVGs. While it is running, take a look at the [nnSVG paper](https://www.nature.com/articles/s41467-023-39748-z) and the [package vignette](https://bioconductor.org/packages/devel/bioc/vignettes/nnSVG/inst/doc/nnSVG.html) to better understand how the method works, including its handling of covariates and multiple samples.
+::: callout-note
+`nnSVG` is quite slow to run, so we will launch it only on the top HVGs. While it is running, take a look at the [nnSVG paper](https://www.nature.com/articles/s41467-023-39748-z) and the [package vignette](https://bioconductor.org/packages/devel/bioc/vignettes/nnSVG/inst/doc/nnSVG.html) to better understand how the method works, including its handling of covariates and multiple samples.
+:::
 
 We will launch it on a small subset of the HVGs 
 ```{r day2-2-svg-feature-set-signatures-4}
@@ -176,6 +182,7 @@ top_nnSVG <- res_nnSVG$Symbol[seq_len(6)]
 ```
 
 The main output is in `rowData` of the `SpatialExperiment` object, which includes: the likelihood ratio statistic (`LR_stat`), the gene’s rank based on this statistic (`rank`), raw p-values from a chi-squared test with 2 degrees of freedom (`pval`), p-values adjusted for multiple testing (`padj`), and the estimated effect size (`prop_sv`), defined as the proportion of spatial variance relative to total variance.
+:::
 
 ## Dimensionality Reduction (DR)
 Thereafter we make use of the highly variable genes (HVGs) to perform dimensionality reduction and clustering.
