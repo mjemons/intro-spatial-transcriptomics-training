@@ -123,7 +123,7 @@ p1 <- ggcells(sfe, aes(x=detected, y=sum)) +
   ggtitle("Library size vs. detected")
 
 # Plot mito proportion vs. detected genes
-p2 <- ggcells(sfe, aes(x=detected, y=subsets_Mito_percent*100)) + 
+p2 <- ggcells(sfe, aes(x=detected, y=subsets_Mito_percent)) + 
   geom_point() +
   geom_density_2d() +
   scale_x_log10() +
