@@ -32,69 +32,6 @@
     "Version": "3.22"
   },
   "Packages": {
-    "AUCell": {
-      "Package": "AUCell",
-      "Version": "1.32.0",
-      "Source": "Bioconductor",
-      "Type": "Package",
-      "Title": "AUCell: Analysis of 'gene set' activity in single-cell RNA-seq data (e.g. identify cells with specific gene signatures)",
-      "Date": "2024-03-09",
-      "Author": "Sara Aibar, Stein Aerts. Laboratory of Computational Biology. VIB-KU Leuven Center for Brain & Disease Research. Leuven, Belgium.",
-      "Maintainer": "Gert Hulselmans <Gert.Hulselmans@kuleuven.be>",
-      "Description": "AUCell allows to identify cells with active gene sets (e.g. signatures, gene modules...) in single-cell RNA-seq data. AUCell uses the \"Area Under the Curve\" (AUC) to calculate whether a critical subset of the input gene set is enriched within the expressed genes for each cell. The distribution of AUC scores across all the cells allows exploring the relative expression of the signature. Since the scoring method is ranking-based, AUCell is independent of the gene expression units and the normalization procedure. In addition, since the cells are evaluated individually, it can easily be applied to bigger datasets, subsetting the expression matrix if needed.",
-      "URL": "http://scenic.aertslab.org",
-      "Imports": [
-        "DelayedArray",
-        "DelayedMatrixStats",
-        "data.table",
-        "graphics",
-        "grDevices",
-        "GSEABase",
-        "Matrix",
-        "methods",
-        "mixtools",
-        "R.utils",
-        "stats",
-        "SummarizedExperiment",
-        "BiocGenerics",
-        "utils"
-      ],
-      "Enhances": [
-        "doMC",
-        "doRNG",
-        "doParallel",
-        "foreach"
-      ],
-      "Suggests": [
-        "Biobase",
-        "BiocStyle",
-        "doSNOW",
-        "dynamicTreeCut",
-        "DT",
-        "GEOquery",
-        "knitr",
-        "NMF",
-        "plyr",
-        "R2HTML",
-        "rmarkdown",
-        "reshape2",
-        "plotly",
-        "Rtsne",
-        "testthat",
-        "zoo"
-      ],
-      "License": "GPL-3",
-      "biocViews": "SingleCell, GeneSetEnrichment, Transcriptomics, Transcription, GeneExpression, WorkflowStep, Normalization",
-      "VignetteBuilder": "knitr",
-      "RoxygenNote": "7.2.0",
-      "Config/pak/sysreqs": "make libicu-dev libpng-dev libxml2-dev libssl-dev zlib1g-dev",
-      "Repository": "https://bioc-release.r-universe.dev",
-      "NeedsCompilation": "no",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/bioc/AUCell",
-      "RemoteRef": "RELEASE_3_22",
-      "RemoteSha": "a57f250c342d048ce388ef5c2c082ad6a354115a"
-    },
     "AnnotationDbi": {
       "Package": "AnnotationDbi",
       "Version": "1.72.0",
@@ -1393,52 +1330,6 @@
       "Maintainer": "Achim Zeileis <Achim.Zeileis@R-project.org>",
       "Repository": "CRAN",
       "Encoding": "UTF-8"
-    },
-    "GSEABase": {
-      "Package": "GSEABase",
-      "Version": "1.72.0",
-      "Source": "Bioconductor",
-      "Type": "Package",
-      "Title": "Gene set enrichment data structures and methods",
-      "Authors@R": "c( person(\"Martin\", \"Morgan\", role = \"aut\"), person(\"Seth\", \"Falcon\", role = \"aut\"), person(\"Robert\", \"Gentleman\", role = \"aut\"), person(\"Paul\", \"Villafuerte\", role = \"ctb\", comment = \"'GSEABase' vignette translation from Sweave to Rmarkdown / HTML\"), person(\"Bioconductor Package Maintainer\", role = \"cre\", email = \"maintainer@bioconductor.org\" ))",
-      "Description": "This package provides classes and methods to support Gene Set Enrichment Analysis (GSEA).",
-      "License": "Artistic-2.0",
-      "Depends": [
-        "R (>= 2.6.0)",
-        "BiocGenerics (>= 0.13.8)",
-        "Biobase (>= 2.17.8)",
-        "annotate (>= 1.45.3)",
-        "methods",
-        "graph (>= 1.37.2)"
-      ],
-      "Suggests": [
-        "hgu95av2.db",
-        "GO.db",
-        "org.Hs.eg.db",
-        "Rgraphviz",
-        "ReportingTools",
-        "testthat",
-        "BiocStyle",
-        "knitr",
-        "RUnit"
-      ],
-      "Imports": [
-        "AnnotationDbi",
-        "XML"
-      ],
-      "LazyLoad": "yes",
-      "Collate": "utilities.R AAA.R AllClasses.R AllGenerics.R getObjects.R methods-CollectionType.R methods-ExpressionSet.R methods-GeneColorSet.R methods-GeneIdentifierType.R methods-GeneSet.R methods-GeneSetCollection.R methods-OBOCollection.R",
-      "VignetteBuilder": "knitr",
-      "biocViews": "GeneExpression, GeneSetEnrichment, GraphAndNetwork, GO, KEGG",
-      "Config/pak/sysreqs": "libpng-dev libxml2-dev libssl-dev zlib1g-dev",
-      "Repository": "https://bioc-release.r-universe.dev",
-      "NeedsCompilation": "no",
-      "Author": "Martin Morgan [aut], Seth Falcon [aut], Robert Gentleman [aut], Paul Villafuerte [ctb] ('GSEABase' vignette translation from Sweave to Rmarkdown / HTML), Bioconductor Package Maintainer [cre]",
-      "Maintainer": "Bioconductor Package Maintainer <maintainer@bioconductor.org>",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/bioc/GSEABase",
-      "RemoteRef": "RELEASE_3_22",
-      "RemoteSha": "8f4e176962268e1a366d812f615c8ae6bc98b0f8"
     },
     "GenomeInfoDb": {
       "Package": "GenomeInfoDb",
@@ -3879,32 +3770,6 @@
       "RemoteRef": "RELEASE_3_22",
       "RemoteSha": "d689ab87e12f2ea69d39e3352058afec727aa702"
     },
-    "XML": {
-      "Package": "XML",
-      "Version": "3.99-0.19",
-      "Source": "Repository",
-      "Authors@R": "c(person(\"CRAN Team\", role = c('ctb', 'cre'), email = \"CRAN@r-project.org\", comment = \"de facto maintainer since 2013\"), person(\"Duncan\", \"Temple Lang\", role = c(\"aut\"), email = \"duncan@r-project.org\", comment = c(ORCID = \"0000-0003-0159-1546\")), person(\"Tomas\", \"Kalibera\", role = \"ctb\"), person(\"Ivan\", \"Krylov\", role = \"ctb\"))",
-      "Title": "Tools for Parsing and Generating XML Within R and S-Plus",
-      "Depends": [
-        "R (>= 4.0.0)",
-        "methods",
-        "utils"
-      ],
-      "Suggests": [
-        "bitops",
-        "RCurl"
-      ],
-      "SystemRequirements": "libxml2 (>= 2.6.3)",
-      "Description": "Many approaches for both reading and creating XML (and HTML) documents (including DTDs), both local and accessible via HTTP or FTP.  Also offers access to an 'XPath' \"interpreter\".",
-      "URL": "https://www.omegahat.net/RSXML/",
-      "License": "BSD_3_clause + file LICENSE",
-      "Collate": "AAA.R DTD.R DTDClasses.R DTDRef.R SAXMethods.R XMLClasses.R applyDOM.R assignChild.R catalog.R createNode.R dynSupports.R error.R flatTree.R nodeAccessors.R parseDTD.R schema.R summary.R tangle.R toString.R tree.R version.R xmlErrorEnums.R xmlEventHandler.R xmlEventParse.R xmlHandler.R xmlInternalSource.R xmlOutputDOM.R xmlNodes.R xmlOutputBuffer.R xmlTree.R xmlTreeParse.R htmlParse.R hashTree.R zzz.R supports.R parser.R libxmlFeatures.R xmlString.R saveXML.R namespaces.R readHTMLTable.R reflection.R xmlToDataFrame.R bitList.R compare.R encoding.R fixNS.R xmlRoot.R serialize.R xmlMemoryMgmt.R keyValueDB.R solrDocs.R XMLRErrorInfo.R xincludes.R namespaceHandlers.R tangle1.R htmlLinks.R htmlLists.R getDependencies.R getRelativeURL.R xmlIncludes.R simplifyPath.R",
-      "NeedsCompilation": "yes",
-      "Author": "CRAN Team [ctb, cre] (de facto maintainer since 2013), Duncan Temple Lang [aut] (ORCID: <https://orcid.org/0000-0003-0159-1546>), Tomas Kalibera [ctb], Ivan Krylov [ctb]",
-      "Maintainer": "CRAN Team <CRAN@r-project.org>",
-      "Repository": "CRAN",
-      "Encoding": "UTF-8"
-    },
     "XVector": {
       "Package": "XVector",
       "Version": "0.50.0",
@@ -4318,61 +4183,6 @@
       "RemoteRef": "RELEASE_3_22",
       "RemoteSha": "d3f273792fa4eb68d59b46d0e8313970fe815505"
     },
-    "annotate": {
-      "Package": "annotate",
-      "Version": "1.88.0",
-      "Source": "Bioconductor",
-      "Title": "Annotation for microarrays",
-      "Author": "R. Gentleman",
-      "Authors@R": "c( person(\"Jeff\", \"Gentry\", role = \"aut\"), person(\"Kritika\", \"Verma\", role = \"ctb\", comment = \"Converted chromLOC vignette from Sweave to RMarkdown / HTML.\"), person(\"Manvi\", \"Yaduvanshi\", role = \"ctb\", comment = \"Converted useDataPkgs vignette from Sweave to RMarkdown / HTML.\"), person(\"Bioconductor Package Maintainer\", email = \"maintainer@bioconductor.org\", role = \"cre\"))",
-      "Description": "Using R enviroments for annotation.",
-      "Depends": [
-        "R (>= 2.10)",
-        "AnnotationDbi (>= 1.27.5)",
-        "XML"
-      ],
-      "Imports": [
-        "Biobase",
-        "DBI",
-        "xtable",
-        "graphics",
-        "utils",
-        "stats",
-        "methods",
-        "BiocGenerics (>= 0.13.8)",
-        "httr"
-      ],
-      "Suggests": [
-        "hgu95av2.db",
-        "genefilter",
-        "Biostrings (>= 2.25.10)",
-        "IRanges",
-        "rae230a.db",
-        "rae230aprobe",
-        "tkWidgets",
-        "GO.db",
-        "org.Hs.eg.db",
-        "org.Mm.eg.db",
-        "humanCHRLOC",
-        "Rgraphviz",
-        "RUnit",
-        "BiocStyle",
-        "knitr"
-      ],
-      "VignetteBuilder": "knitr",
-      "License": "Artistic-2.0",
-      "LazyLoad": "yes",
-      "Collate": "AllGenerics.R ACCNUMStats.R Amat.R AnnMaps.R chromLocation.R compatipleVersions.R findNeighbors.R getData.R getPMInfo.R getSeq4ACC.R GOhelpers.R homoData.R html.R isValidKey.R LL2homology.R pmid2MIAME.R pubMedAbst.R query.R readGEOAnn.R serializeEnv.R blastSequences.R zzz.R test_annotate_package.R",
-      "biocViews": "Annotation, Pathways, GO",
-      "Config/pak/sysreqs": "libpng-dev libxml2-dev libssl-dev zlib1g-dev",
-      "Repository": "https://bioc-release.r-universe.dev",
-      "NeedsCompilation": "no",
-      "Maintainer": "Bioconductor Package Maintainer <maintainer@bioconductor.org>",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/bioc/annotate",
-      "RemoteRef": "RELEASE_3_22",
-      "RemoteSha": "bc0d5a07cf29902d84eb8b9594ff66103e484faf"
-    },
     "aricode": {
       "Package": "aricode",
       "Version": "1.0.3",
@@ -4560,40 +4370,6 @@
       "RemoteUrl": "https://github.com/bioc/assorthead",
       "RemoteRef": "RELEASE_3_22",
       "RemoteSha": "9255f2fcb46f6cf703efcc0fba311c7263008880"
-    },
-    "babelgene": {
-      "Package": "babelgene",
-      "Version": "22.9",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Gene Orthologs for Model Organisms in a Tidy Data Format",
-      "Authors@R": "person(\"Igor\", \"Dolgalev\", , \"igor.dolgalev@nyumc.org\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-4451-126X\"))",
-      "Description": "Genomic analysis of model organisms frequently requires the use of databases based on human data or making comparisons to patient-derived resources. This requires harmonization of gene names into the same gene space. The 'babelgene' R package converts between human and non-human gene orthologs/homologs. The package integrates orthology assertion predictions sourced from multiple databases as compiled by the HGNC Comparison of Orthology Predictions (HCOP) (Wright et al. 2005 <doi:10.1007/s00335-005-0103-2>, Eyre et al. 2007 <doi:10.1093/bib/bbl030>, Seal et al. 2011 <doi:10.1093/nar/gkq892>).",
-      "License": "MIT + file LICENSE",
-      "URL": "https://igordot.github.io/babelgene/",
-      "BugReports": "https://github.com/igordot/babelgene/issues",
-      "Depends": [
-        "R (>= 3.4)"
-      ],
-      "Imports": [
-        "dplyr",
-        "methods",
-        "rlang"
-      ],
-      "Suggests": [
-        "covr",
-        "knitr",
-        "rmarkdown",
-        "testthat (>= 3.0.0)"
-      ],
-      "VignetteBuilder": "knitr",
-      "Config/testthat/edition": "3",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.2.1",
-      "NeedsCompilation": "no",
-      "Author": "Igor Dolgalev [aut, cre] (<https://orcid.org/0000-0003-4451-126X>)",
-      "Maintainer": "Igor Dolgalev <igor.dolgalev@nyumc.org>",
-      "Repository": "CRAN"
     },
     "backports": {
       "Package": "backports",
@@ -7862,50 +7638,6 @@
       "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
-    "graph": {
-      "Package": "graph",
-      "Version": "1.88.1",
-      "Source": "Bioconductor",
-      "Title": "graph: A package to handle graph data structures",
-      "Authors@R": "c( person(\"R\", \"Gentleman\", role = \"aut\"), person(\"Elizabeth\", \"Whalen\", role=\"aut\"), person(\"W\", \"Huber\", role=\"aut\"), person(\"S\", \"Falcon\", role=\"aut\"), person(\"Jeff\", \"Gentry\", role=\"aut\"), person(\"Paul\", \"Shannon\", role=\"aut\"), person(\"Halimat C.\", \"Atanda\", role = \"ctb\", comment = \"Converted 'MultiGraphClass' and 'GraphClass' vignettes from Sweave to RMarkdown / HTML.\" ),    person(\"Paul\", \"Villafuerte\", role = \"ctb\", comment = \"Converted vignettes from Sweave to RMarkdown / HTML.\" ), person(\"Aliyu Atiku\", \"Mustapha\", role = \"ctb\", comment = \"Converted 'Graph' vignette from Sweave to RMarkdown / HTML.\" ), person(\"Bioconductor Package Maintainer\", role = \"cre\", email = \"maintainer@bioconductor.org\" ))",
-      "Description": "A package that implements some simple graph handling capabilities.",
-      "License": "Artistic-2.0",
-      "Depends": [
-        "R (>= 2.10)",
-        "methods",
-        "BiocGenerics (>= 0.13.11)"
-      ],
-      "Imports": [
-        "stats",
-        "stats4",
-        "utils"
-      ],
-      "Suggests": [
-        "SparseM (>= 0.36)",
-        "XML",
-        "RBGL",
-        "RUnit",
-        "cluster",
-        "BiocStyle",
-        "knitr"
-      ],
-      "Enhances": [
-        "Rgraphviz"
-      ],
-      "Collate": "AllClasses.R AllGenerics.R bitarray.R buildDepGraph.R methods-graph.R graphNEL.R clustergraph.R NELhandler.R edgefunctions.R graphfunctions.R GXLformals.R gxlReader.R random.R write.tlp.R mat2graph.R settings.R zzz.R standardLabeling.R TODOT.R toDotWithRI.R methods-graphAM.R attrData.R reverseEdgeDirections.R nodes-methods.R methods-multiGraph.R MultiGraph.R methods-graphBAM.R graph-constructors.R",
-      "LazyLoad": "yes",
-      "biocViews": "GraphAndNetwork",
-      "RoxygenNote": "7.2.3",
-      "VignetteBuilder": "knitr",
-      "Repository": "https://bioc-release.r-universe.dev",
-      "NeedsCompilation": "yes",
-      "Author": "R Gentleman [aut], Elizabeth Whalen [aut], W Huber [aut], S Falcon [aut], Jeff Gentry [aut], Paul Shannon [aut], Halimat C. Atanda [ctb] (Converted 'MultiGraphClass' and 'GraphClass' vignettes from Sweave to RMarkdown / HTML.), Paul Villafuerte [ctb] (Converted vignettes from Sweave to RMarkdown / HTML.), Aliyu Atiku Mustapha [ctb] (Converted 'Graph' vignette from Sweave to RMarkdown / HTML.), Bioconductor Package Maintainer [cre]",
-      "Maintainer": "Bioconductor Package Maintainer <maintainer@bioconductor.org>",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/bioc/graph",
-      "RemoteRef": "RELEASE_3_22",
-      "RemoteSha": "18346609f983e67db28095e729bf19d53a99bb33"
-    },
     "gridExtra": {
       "Package": "gridExtra",
       "Version": "2.3",
@@ -9933,34 +9665,6 @@
       "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
-    "mixtools": {
-      "Package": "mixtools",
-      "Version": "2.0.0.1",
-      "Source": "Repository",
-      "Date": "2022-12-04",
-      "Title": "Tools for Analyzing Finite Mixture Models",
-      "Authors@R": "c(person(\"Derek\", \"Young\", role = c(\"aut\", \"cre\"), email = \"derek.young@uky.edu\", comment = c(ORCID = \"0000-0002-3048-3803\")), person(\"Tatiana\", \"Benaglia\", role = \"aut\"), person(\"Didier\", \"Chauveau\", role = \"aut\"), person(\"David\", \"Hunter\", role = \"aut\"), person(\"Kedai\", \"Cheng\", role = \"aut\"), person(\"Ryan\", \"Elmore\", role = \"ctb\"), person(\"Thomas\", \"Hettmansperger\", role = \"ctb\"), person(\"Hoben\", \"Thomas\", role = \"ctb\"), person(\"Fengjuan\", \"Xuan\", role = \"ctb\"))",
-      "Depends": [
-        "R (>= 4.0.0)"
-      ],
-      "Imports": [
-        "kernlab",
-        "MASS",
-        "plotly",
-        "scales",
-        "segmented",
-        "stats",
-        "survival"
-      ],
-      "URL": "https://github.com/dsy109/mixtools",
-      "Description": "Analyzes finite mixture models for various parametric and semiparametric settings.  This includes mixtures of parametric distributions (normal, multivariate normal, multinomial, gamma), various Reliability Mixture Models (RMMs), mixtures-of-regressions settings (linear regression, logistic regression, Poisson regression, linear regression with changepoints, predictor-dependent mixing proportions, random effects regressions, hierarchical mixtures-of-experts), and tools for selecting the number of components (bootstrapping the likelihood ratio test statistic, mixturegrams, and model selection criteria).  Bayesian estimation of mixtures-of-linear-regressions models is available as well as a novel data depth method for obtaining credible bands.  This package is based upon work supported by the National Science Foundation under Grant No. SES-0518772 and the Chan Zuckerberg Initiative: Essential Open Source Software for Science (Grant No. 2020-255193).",
-      "License": "GPL (>= 2)",
-      "NeedsCompilation": "yes",
-      "Author": "Derek Young [aut, cre] (<https://orcid.org/0000-0002-3048-3803>), Tatiana Benaglia [aut], Didier Chauveau [aut], David Hunter [aut], Kedai Cheng [aut], Ryan Elmore [ctb], Thomas Hettmansperger [ctb], Hoben Thomas [ctb], Fengjuan Xuan [ctb]",
-      "Maintainer": "Derek Young <derek.young@uky.edu>",
-      "Repository": "CRAN",
-      "Encoding": "UTF-8"
-    },
     "modelr": {
       "Package": "modelr",
       "Version": "0.1.11",
@@ -9998,46 +9702,6 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
-      "Repository": "CRAN"
-    },
-    "msigdbr": {
-      "Package": "msigdbr",
-      "Version": "25.1.1",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "MSigDB Gene Sets for Multiple Organisms in a Tidy Data Format",
-      "Authors@R": "person(\"Igor\", \"Dolgalev\", , \"igor.dolgalev@nyumc.org\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-4451-126X\"))",
-      "Description": "Provides the 'Molecular Signatures Database' (MSigDB) gene sets typically used with the 'Gene Set Enrichment Analysis' (GSEA) software (Subramanian et al. 2005 <doi:10.1073/pnas.0506580102>, Liberzon et al. 2015 <doi:10.1016/j.cels.2015.12.004>, Castanza et al. 2023 <doi:10.1038/s41592-023-02014-7>) as an R data frame. The package includes the human genes as listed in MSigDB as well as the corresponding symbols and IDs for frequently studied model organisms such as mouse, rat, pig, fly, and yeast.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://igordot.github.io/msigdbr/",
-      "BugReports": "https://github.com/igordot/msigdbr/issues",
-      "Depends": [
-        "R (>= 4.1)"
-      ],
-      "Imports": [
-        "assertthat",
-        "babelgene (>= 22.9)",
-        "curl",
-        "dplyr (>= 1.1.1)",
-        "lifecycle",
-        "methods",
-        "rlang",
-        "tibble",
-        "tidyselect (>= 1.2.0)",
-        "tools"
-      ],
-      "Suggests": [
-        "knitr",
-        "rmarkdown",
-        "roxygen2",
-        "testthat"
-      ],
-      "Config/Needs/website": "rmarkdown",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "NeedsCompilation": "no",
-      "Author": "Igor Dolgalev [aut, cre] (ORCID: <https://orcid.org/0000-0003-4451-126X>)",
-      "Maintainer": "Igor Dolgalev <igor.dolgalev@nyumc.org>",
       "Repository": "CRAN"
     },
     "multcomp": {
@@ -12817,28 +12481,6 @@
       "RemoteUrl": "https://github.com/bioc/scuttle",
       "RemoteRef": "RELEASE_3_22",
       "RemoteSha": "2796dbd1727f965381c7b4cbaf480ec4dc567b8c"
-    },
-    "segmented": {
-      "Package": "segmented",
-      "Version": "2.1-4",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Regression Models with Break-Points / Change-Points Estimation (with Possibly Random Effects)",
-      "Date": "2025-02-26",
-      "Authors@R": "c(person(given = c(\"Vito\",\"M.\",\"R.\"), family = \"Muggeo\", role = c(\"aut\", \"cre\"), email = \"vito.muggeo@unipa.it\", comment=c(ORCID=\"0000-0002-3386-4054\")))",
-      "Maintainer": "Vito M. R. Muggeo <vito.muggeo@unipa.it>",
-      "Description": "Fitting regression models where, in addition to possible linear terms, one or more covariates have segmented (i.e., broken-line or piece-wise linear) or stepmented (i.e. piece-wise constant) effects. Multiple breakpoints for the same variable are allowed.  The estimation method is discussed in Muggeo (2003, <doi:10.1002/sim.1545>) and  illustrated in Muggeo (2008, <https://www.r-project.org/doc/Rnews/Rnews_2008-1.pdf>). An approach for hypothesis testing is presented  in Muggeo (2016, <doi:10.1080/00949655.2016.1149855>), and interval estimation for the breakpoint is discussed in Muggeo (2017, <doi:10.1111/anzs.12200>).  Segmented mixed models, i.e. random effects in the change point, are discussed in Muggeo (2014, <doi:10.1177/1471082X13504721>). Estimation of piecewise-constant relationships and changepoints (mean-shift models) is  discussed in Fasola et al. (2018, <doi:10.1007/s00180-017-0740-4>).",
-      "Depends": [
-        "R (>= 3.5.0)",
-        "MASS",
-        "nlme"
-      ],
-      "License": "GPL",
-      "NeedsCompilation": "no",
-      "Author": "Vito M. R. Muggeo [aut, cre] (<https://orcid.org/0000-0002-3386-4054>)",
-      "RoxygenNote": "7.3.1",
-      "Repository": "CRAN",
-      "Encoding": "UTF-8"
     },
     "selectr": {
       "Package": "selectr",
