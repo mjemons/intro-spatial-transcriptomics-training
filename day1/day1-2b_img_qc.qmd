@@ -21,7 +21,7 @@ Imaging-based spatial transcriptomics platforms require specific quality control
 - **Spatial context** — artifacts such as tissue-edge cells, isolated debris, and field-of-view seams are invisible to per-cell metrics alone; they reveal themselves only when QC values are mapped back onto tissue.
 
 ::: callout-note
-Throughout this exercise we use the [`Voyager`](https://pachterlab.github.io/voyager/) and `SpatialFeatureExperiment` (SFE) ecosystem. `Voyager`. The QC steps here closely follow the official [Voyager Xenium vignette](https://pachterlab.github.io/voyager/articles/vig5_xenium.html), which is the recommended further reading.
+Throughout this exercise we use the [`Voyager`](https://pachterlab.github.io/voyager/) and `SpatialFeatureExperiment` (SFE) ecosystem. The QC steps here closely follow the official [Voyager Xenium vignette](https://pachterlab.github.io/voyager/articles/vig5_xenium.html), which is the recommended further reading.
 :::
 
 
@@ -83,7 +83,7 @@ We start with the Xenium object saved at the end of Exercise 1B. It is a `Spatia
 
 ```{r day1-2b-img-qc-2}
 # Reload the SpatialFeatureExperiment object if not in the R session already
-sfe <- alabaster.base::readObject(here::here("results/day1/01.1b_sfe_xenium"))
+sfe <- alabaster.base::readObject("results/day1/01.1b_sfe_xenium")
 ## Otherwise, quickly go through Exercise day1-1b to recreate the object
 sfe
 ```
@@ -222,6 +222,8 @@ ggplot(tx_neg, aes(x_location, -y_location)) +
   geom_bin2d(binwidth = 30) +
   scale_fill_distiller(palette = "Blues", direction = 1) +
   labs(x = NULL, y = NULL)
+
+gc()
 ```
 
 The negative-control signal is low across the entire tissue (most bins are pale, in the single digits), and cleanly outlines the tissue footprint, with the off-tissue area essentially empty.
@@ -313,9 +315,11 @@ The cell-level metrics inherit whatever decoding quality the transcripts had. Us
 tx |>
   ggplot(aes(qv)) +
   geom_histogram(bins = 100) +
+  scale_y_log10() + 
   geom_vline(xintercept = 20, color = "red", linetype = 2) +
   labs(x = "Transcript quality value (qv)", y = "count")
 
+gc()
 # Fraction below Q20
 mean(tx$qv < 20)
 
@@ -327,6 +331,8 @@ tx |>
   summarise(mean_qv = mean(qv), n = n(), .groups = "drop") |>
   arrange(mean_qv) |>
   head(10)
+rm(tx)
+gc()
 ```
 :::
 
