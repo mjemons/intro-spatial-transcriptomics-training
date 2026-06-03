@@ -83,22 +83,54 @@ Download P2 Visium HD data:
 ```{r day1-1a-SpatialExperiment-5}
 options(timeout = 600)
 
-if (!dir.exists("data/Human_Colon_Cancer_P2/")) {
-  dir.create("data", showWarnings = FALSE)
+data_dir <- "data"
+dir.create(data_dir, showWarnings = FALSE)
+
+folders <- c(
+  "day3",
+  "FLEX",
+  "Human_Colon_Cancer_P2",
+  "segmented_outputs"
+)
+
+local_paths <- file.path(data_dir, "Human_Colon_Cancer_P2")
+
+# CASE 1: already present locally (downloaded OR symlinked)
+if (file.exists(local_paths)) {
+
+  message("Data already available in ./data — nothing to do")
+
+# CASE 2: available in /data → create symlinks
+} else if (all(file.exists(file.path("/data", folders)))) {
+
+  message("Data found in /data — creating symlinks")
+
+  for (f in folders) {
+    src <- file.path("/data", f)
+    dest <- file.path(data_dir, f)
+
+    if (!file.exists(dest)) {
+      file.symlink(from = src, to = dest)
+    }
+  }
+
+# CASE 3: missing → download
+} else {
+
+  message("Data not found — downloading into ./data")
+
   download.file(
     url = "https://intro-spatial-transcriptomics-training.s3.eu-central-1.amazonaws.com/spatial_course_data.tar.gz",
-    destfile = "data/spatial_course_data.tar.gz",
+    destfile = file.path(data_dir, "spatial_course_data.tar.gz"),
     mode = "wb"
   )
 
   untar(
-    tarfile = "data/spatial_course_data.tar.gz",
-    exdir = "data/"
+    tarfile = file.path(data_dir, "spatial_course_data.tar.gz"),
+    exdir = data_dir
   )
 
-  file.remove("data/spatial_course_data.tar.gz")
-} else {
-  message("Data exists, please proceed to next steps!")
+  file.remove(file.path(data_dir, "spatial_course_data.tar.gz"))
 }
 ```
 
