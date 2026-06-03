@@ -299,7 +299,7 @@ plotColData(sfe, x="nCounts", y="nGenes", bins = 70) +
 
 
 ::: callout-important
-### Exercise 3
+### Bonus exercise 3
 
 The cell-level metrics inherit whatever decoding quality the transcripts had. Using `transcripts.parquet`, explore the per-transcript **quality value** (`qv`, a Phred-scaled decoding confidence). What fraction of transcripts fall below the conventional Q20 cutoff, and which genes have the lowest mean `qv`?
 
