@@ -8,12 +8,12 @@ title: "Precourse preparations"
 ### Knowledge
 You should meet the learning outcomes of: [Single-Cell Transcriptomics with R](https://www.sib.swiss/training/course/20260318_ISCTR)
 
-In summary, participants must already have a basic knowledge in:
-- Next Generation Sequencing (NGS) techniques
-- Analyzing gene expression data
-- Dimensionality reduction (`PCA`, `UMAP`)
-- Graph-based clustering 
-- `R` (evaluate your `R` skills [here](https://docs.google.com/forms/d/e/1FAIpQLSdIyeuabd_ZOWXgI1MWHapmaOMu20L9ESkLDZiWnpmkpujyOg/viewform?usp=sf_link))
+In summary, participants must already have a basic knowledge in:\
+- Next Generation Sequencing (NGS) techniques\
+- Analyzing gene expression data\
+- Dimensionality reduction (`PCA`, `UMAP`)\
+- Graph-based clustering\
+- `R` (evaluate your `R` skills [here](https://docs.google.com/forms/d/e/1FAIpQLSdIyeuabd_ZOWXgI1MWHapmaOMu20L9ESkLDZiWnpmkpujyOg/viewform?usp=sf_link))\
 - `UNIX` (self-assess your skills with the e-learning course [`UNIX` Fundamentals](https://www.sib.swiss/training/course/2012_UNIXF), and this [quiz](https://docs.google.com/forms/d/e/1FAIpQLSd2BEWeOKLbIRGBT_aDEGPce1FOaVYBbhBiaqcaHoBKNB27MQ/viewform?usp=sf_link))
 
 ### Technical
